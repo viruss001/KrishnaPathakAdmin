@@ -1,9 +1,36 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { ENDPOINTS } from "../utils/api";
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      // Call your logout API endpoint
+      const res = await fetch(ENDPOINTS.LOGOUT, {
+        method: "POST", // or "GET" depending on backend
+        credentials: "include",
+      });
+
+      // Regardless of success or failure, remove the stored token
+      localStorage.removeItem("jwt");
+
+      if (!res.ok) {
+        console.error("Logout failed");
+      }
+
+      // Redirect to login page
+      router.push("/auth/login");
+    } catch (error) {
+      console.error("Logout error:", error);
+      // Still remove token and redirect in case of network errors
+      localStorage.removeItem("jwt");
+      router.push("/auth/login");
+    }
+  };
 
   const links = [
     { href: "/dashboard", label: "Home Section" },
@@ -38,7 +65,7 @@ const Sidebar = () => {
 
       {/* Logout Button */}
       <button
-        onClick={() => alert("Logging out...")}
+        onClick={handleLogout}
         className="mt-auto bg-red-600 hover:bg-red-700 p-2 rounded-lg font-semibold transition-colors duration-200"
       >
         Logout

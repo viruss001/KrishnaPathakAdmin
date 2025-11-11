@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "src/app/dashboard/policy/page.jsx", "src/app/dashboard/blog/page.jsx", "src/app/dashboard/blog/[id]/editblog/page.jsx", "src/app/dashboard/price/page.jsx", "src/app/dashboard/price/[id]/editpage/page.jsx", "src/app/auth/signup/page.jsx", "src/app/auth/otp/page.jsx"  ],
+, "src/app/dashboard/policy/page.jsx", "src/app/dashboard/blog/page.jsx", "src/app/dashboard/blog/[id]/editblog/page.jsx", "src/app/dashboard/price/page.jsx", "src/app/dashboard/price/[id]/editpage/page.jsx", "src/app/auth/signup/page.jsx", "src/app/auth/otp/page.jsx", "src/app/dashboard/layout.jsx"  ],
   "exclude": ["node_modules"]
 }
