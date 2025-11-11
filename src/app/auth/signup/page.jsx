@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { User, Phone, Lock, Eye, EyeOff, Mail } from "lucide-react";
+import { User, Lock, Eye, EyeOff, Mail } from "lucide-react";
 import { ENDPOINTS } from "../../../../utils/api";
 import { useRouter } from "next/navigation";
 
@@ -11,7 +11,6 @@ export default function SignupPage() {
 
   const [formData, setFormData] = useState({
     name: "",
-    phone: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -31,9 +30,9 @@ export default function SignupPage() {
   };
 
   const handleSignup = async () => {
-    const { name, phone, email, password, confirmPassword } = formData;
+    const { name, email, password, confirmPassword } = formData;
 
-    if (!name || !phone || !email || !password || !confirmPassword) {
+    if (!name || !email || !password || !confirmPassword) {
       setErrorMsg("⚠️ Please fill in all fields.");
       return;
     }
@@ -53,7 +52,7 @@ export default function SignupPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, phone, email, password }),
+        body: JSON.stringify({ name, email, password }),
       });
 
       const data = await res.json();
@@ -63,7 +62,6 @@ export default function SignupPage() {
       }
 
       setMsg(data.message || "✅ Signup successful!");
-      // Redirect to OTP verification
       router.push(`/auth/login`);
     } catch (error) {
       setErrorMsg(error.message || "❌ Something went wrong. Try again.");
@@ -94,9 +92,6 @@ export default function SignupPage() {
               className="bg-transparent outline-none w-full text-gray-700 placeholder-gray-600"
             />
           </div>
-
-          {/* Mobile Number */}
-        
 
           {/* Email */}
           <div className="flex items-center border border-gray-700 rounded-full px-4 py-3 bg-transparent">
